@@ -44,3 +44,12 @@ ggplot(dicentric)+
 with(dicentric, interaction.plot(doseamt, doserate, ca/cells, legend=TRUE))
 
 #modelagem
+fit <- glm(ca~doserate + factor(doseamt) + doserate:factor(doseamt) + 
+            offset(log(cells)),family = poisson,dicentric)
+
+model.matrix(fit)
+summary(fit)
+anova(fit, test="Chisq")
+
+
+
